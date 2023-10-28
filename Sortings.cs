@@ -189,7 +189,7 @@ public class Sortings
         return array;
     }
     // Вспомогательные функции для исследований.
-    public void ReadFromConsole()
+    public int[] ReadFromConsole()
     {
         Console.WriteLine("Сортировка массива и использованием разных алгоритмов.");
         Console.Write("Введите элементы массива: ");
@@ -204,29 +204,46 @@ public class Sortings
         {
             a[i] = Convert.ToInt32(s[i]);
         }
+        return a;
+    }
+    public string timeCheck(int[] a, SortingFunction function)
+    {
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+        function(a);
+        stopwatch.Stop();
+        TimeSpan ts = stopwatch.Elapsed;
+        return String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+    }
+    public int[] GenerateArray(int length)
+    {
+        int[] result = new int[length];
+        Random rnd = new Random();
+        for (int i = 0; i < result.Length; i++)
+        {
+            result[i] = rnd.Next(0, 99);
+        }
+        return result;
+    }
+    public void GetResult(int[] a)
+    {
         int[] clonedArray = (int[])a.Clone();
-        long resultingArray = timeCheck(clonedArray, ShellSorting);
+        string resultingArray = timeCheck(clonedArray, ShellSorting);
         Console.WriteLine("Упорядоченный массив: {0}", string.Join(", ", clonedArray));
         Console.WriteLine("Время потраченное на сортировку Шелла: {0}", resultingArray);
-        clonedArray = (int[])a.Clone();
-        Console.WriteLine("Время потраченное на болотную сортировку: {0}", timeCheck(clonedArray, BogoSorting));
         clonedArray = (int[])a.Clone();
         Console.WriteLine("Время потраченное на сортировку пузырьком: {0}", timeCheck(clonedArray, BubbleSorting));
         clonedArray = (int[])a.Clone();
         Console.WriteLine("Время потраченное на сортировку сляиянием: {0}", timeCheck(clonedArray, MergeSorting));
         clonedArray = (int[])a.Clone();
         Console.WriteLine("Время потраченное на сортировку выбором: {0}", timeCheck(clonedArray, SelectionSorting));
+        clonedArray = (int[])a.Clone();
+        Console.WriteLine("Время потраченное на болотную сортировку: {0}", timeCheck(clonedArray, BogoSorting));
         Console.WriteLine("Нажмите любую кнопку для выхода");
         Console.ReadLine();
     }
-    public long timeCheck(int[] a, SortingFunction function)
+    public void StartSorting()
     {
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
-        function(a);
-        stopwatch.Stop();
-        return stopwatch.ElapsedMilliseconds;
+        GetResult(GenerateArray(11));
     }
 }
-
-
