@@ -191,7 +191,6 @@ public class Sortings
     // Вспомогательные функции для исследований.
     public int[] ReadFromConsole()
     {
-        Console.WriteLine("Сортировка массива и использованием разных алгоритмов.");
         Console.Write("Введите элементы массива: ");
         string? r = Console.ReadLine();
         string[] s = new string[0];
@@ -237,13 +236,31 @@ public class Sortings
         Console.WriteLine("Время потраченное на сортировку сляиянием: {0}", timeCheck(clonedArray, MergeSorting));
         clonedArray = (int[])a.Clone();
         Console.WriteLine("Время потраченное на сортировку выбором: {0}", timeCheck(clonedArray, SelectionSorting));
-        clonedArray = (int[])a.Clone();
-        Console.WriteLine("Время потраченное на болотную сортировку: {0}", timeCheck(clonedArray, BogoSorting));
+        // clonedArray = (int[])a.Clone();
+        // Console.WriteLine("Время потраченное на болотную сортировку: {0}", timeCheck(clonedArray, BogoSorting));
         Console.WriteLine("Нажмите любую кнопку для выхода");
         Console.ReadLine();
     }
     public void StartSorting()
     {
-        GetResult(GenerateArray(11));
+        Console.WriteLine("Сортировка массива и использованием разных алгоритмов. Введите M для ручного ввода или R для генерации массива из случайных чисел заданной длины.");
+        string? r = Console.ReadLine();
+        if (r != null && r.ToUpper() == "M")
+        {
+            GetResult(ReadFromConsole());
+        }
+        else if (r != null && r.ToUpper() == "R")
+        {
+            Console.WriteLine("Введите длину массива: ");
+            string? l = Console.ReadLine();
+            if (l != null)
+            {
+                GetResult(GenerateArray(Convert.ToInt32(l)));
+            }
+        }
+        else
+        {
+            Console.WriteLine("Ошибка ввода.");
+        }
     }
 }
