@@ -69,6 +69,14 @@ public class Files
         // 4.5 Напишите программу, считающую кол-во строк в файле.
         Console.WriteLine($"Всего строк: {lines.Length}");
         // 4.4 Напишите программу, считающую кол-во упоминаний слова “Привет”
+        string text = File.ReadAllText("files/test.txt");
+        string[] source = text.Split(new char[] { '.', '?', '!', ' ', ';', ':', ',' }, StringSplitOptions.RemoveEmptyEntries);
+        IEnumerable<string> matchQuery = from word in source
+                                         where word.Equals("привет", StringComparison.InvariantCultureIgnoreCase)
+                                         select word;
+        int wordCount = matchQuery.Count();
+        Console.WriteLine("{0} раз встретилось слово \"{1}\".", wordCount, "привет");
+
     }
 }
 
