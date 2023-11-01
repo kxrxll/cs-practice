@@ -1,5 +1,4 @@
 using static Sortings;
-
 using System.Diagnostics.Metrics;
 
 public class Recursive
@@ -52,20 +51,17 @@ public class Recursive
     // Входные данные :
     // Входное количество членов для ряда Фибоначчи : 10 
     // Ожидаемый результат : 0 1 1 2 3 5 8 13 21 34 
-    public int Fibonacci(int n)
+    public void Fibonacci(int a, int b, int counter, int number)
     {
-        if (n == 0)
+        Console.Write(a + " ");
+        if (counter < number)
         {
-            return 0;
-        }
-        else if (n == 1)
-        {
-            return 1;
+            Fibonacci(b, a + b, counter + 1, number);
         }
         else
         {
-            return Fibonacci(n - 1) + Fibonacci(n - 2);
-        }
+            Console.WriteLine();
+        };
     }
     // 3.5 Напишите программу на языке C# для вычисления мощности любого числа с использованием рекурсии. 
     // Входные данные :
